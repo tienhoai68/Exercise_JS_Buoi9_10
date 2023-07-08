@@ -21,11 +21,11 @@ function employeeInformation(isAdd) {
 
     isValue = true;
     if (isAdd) {
-        isValue &= validation.checkEmpty(userName, "tbTKNV", "(*) Vui lòng nhập tài khoản") && validation.checkDigitLength(userName, "tbTKNV", "(*) Vui lòng nhập từ 4 - 6 kí số", 4, 6) && validation.checkExistUserName(userName, "tbTKNV", "Tài Khoản đã tồn tại", listEmployee.arr);
+        isValue &= validation.checkEmpty(userName, "tbTKNV", "(*) Vui lòng nhập tài khoản") && validation.checkDigitLength(userName, "tbTKNV", "(*) Vui lòng nhập từ 4 - 6 kí số", 4, 6) && validation.checkExistUserName(userName, "tbTKNV", " (*) Tài Khoản đã tồn tại", listEmployee.arr);
     }
     isValue &= validation.checkEmpty(fullName, "tbTen", "(*) Vui lòng nhập họ và tên") && validation.checkPattern(fullName, "tbTen", "Họ và Tên (*) vui lòng nhập chữ", "^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶ" + "ẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợ" + "ụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\s]+$");
     isValue &= validation.checkEmpty(email, "tbEmail", "(*) Vui lòng nhập email") && validation.checkPattern(email, "tbEmail", "(*) Vui lòng nhập email đúng định dạng", /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/);
-    isValue &= validation.checkEmpty(passWord, "tbMatKhau", "(*) Vui lòng nhập mật khẩu") && validation.checkDigitLength(passWord, "tbMatKhau", "(*) Vui lòng nhập mật khẩu 6-10 kí tự", 6, 10) && validation.checkPattern(passWord, "tbMatKhau", "Mật khẩu bao gồm chữ viết hoa, thường, số, kí tự đặc biệt", /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{0,}$/);
+    isValue &= validation.checkEmpty(passWord, "tbMatKhau", "(*) Vui lòng nhập mật khẩu") && validation.checkDigitLength(passWord, "tbMatKhau", "(*) Vui lòng nhập mật khẩu 6-10 kí tự", 6, 10) && validation.checkPattern(passWord, "tbMatKhau", " (*) Mật khẩu bao gồm chữ viết hoa, thường, số, kí tự đặc biệt", /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{0,}$/);
     isValue &= validation.checkEmpty(basicSalary, "tbLuongCB", "(*) Vui lòng nhập lương") && validation.checkNumber(basicSalary, "tbLuongCB", "(*) Vui lòng nhập lương từ 1000000 => 20000000", 1000000, 20000000);
     isValue &= validation.checkEmpty(workTime, "tbGiolam", "(*) Vui lòng nhập giờ làm") && validation.checkNumber(workTime, "tbGiolam", "(*) Vui lòng nhập giờ làm từ 80 => 200 giờ", 80, 200);
     isValue &= validation.checkEmptyOptions("chucvu", "tbChucVu", "(*) Vui lòng chọn chức vụ");
