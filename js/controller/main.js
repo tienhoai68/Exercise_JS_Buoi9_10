@@ -4,6 +4,10 @@ getLocalStorage();
 function getEle(id) {
     return document.getElementById(id);
 }
+function resetError(id) {
+    getEle(id).style.display = "none";
+    getEle(id).innerHTML = "";
+}
 // hàm thông tin nhân viên
 function employeeInformation(isAdd) {
     var userName = getEle("tknv").value;
@@ -16,16 +20,16 @@ function employeeInformation(isAdd) {
     var workTime = getEle("gioLam").value * 1;
 
     isValue = true;
-    if(isAdd) {
-        isValue &= validation.checkEmpty(userName, "tbTKNV", "Vui lòng nhập tài khoản") && validation.checkDigitLength(userName, "tbTKNV", "Vui lòng nhập từ 4 - 6 kí số", 4, 6)&& validation.checkExistUserName(userName, "tbTKNV", "Tài Khoản đã tồn tại", listEmployee.arr);
+    if (isAdd) {
+        isValue &= validation.checkEmpty(userName, "tbTKNV", "(*) Vui lòng nhập tài khoản") && validation.checkDigitLength(userName, "tbTKNV", "(*) Vui lòng nhập từ 4 - 6 kí số", 4, 6) && validation.checkExistUserName(userName, "tbTKNV", "Tài Khoản đã tồn tại", listEmployee.arr);
     }
-    isValue &= validation.checkEmpty(fullName, "tbTen", "Vui lòng nhập họ và tên") && validation.checkPattern(fullName, "tbTen", "Họ và Tên vui lòng nhập chữ", "^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶ" + "ẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợ" + "ụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\s]+$");
-    isValue &= validation.checkEmpty(email, "tbEmail", "Vui lòng nhập email") && validation.checkPattern(email, "tbEmail", "Vui lòng nhập email đúng định dạng", /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/);
-    isValue &= validation.checkEmpty(passWord, "tbMatKhau", "Vui lòng nhập mật khẩu") && validation.checkDigitLength(passWord, "tbMatKhau", "Vui lòng nhập mật khẩu 6-10 kí tự", 6, 10) && validation.checkPattern(passWord, "tbMatKhau", "Mật khẩu bao gồm chữ viết hoa, thường, số, kí tự đặc biệt", /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{0,}$/);
-    isValue &= validation.checkEmpty(basicSalary, "tbLuongCB", "Vui lòng nhập lương")&& validation.checkNumber(basicSalary, "tbLuongCB", "Vui lòng nhập lương từ 1000000 => 20000000", 1000000, 20000000); 
-    isValue &= validation.checkEmpty(workTime, "tbGiolam", "Vui lòng nhập giờ làm")&& validation.checkNumber(workTime, "tbGiolam", "Vui lòng nhập giờ làm từ 80 => 200 giờ", 80, 200);
-    isValue &= validation.checkEmptyOptions("chucvu", "tbChucVu", "Vui lòng chọn chức vụ");
-    isValue &= validation.checkDayWork("datepicker", "tbNgay", "Vui lòng chọn ngày làm") && validation.checkFormatDay("datepicker", "tbNgay", "Vui lòng chọn theo định dạng MM/dd/yyyy") ;
+    isValue &= validation.checkEmpty(fullName, "tbTen", "(*) Vui lòng nhập họ và tên") && validation.checkPattern(fullName, "tbTen", "Họ và Tên (*) vui lòng nhập chữ", "^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶ" + "ẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợ" + "ụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\s]+$");
+    isValue &= validation.checkEmpty(email, "tbEmail", "(*) Vui lòng nhập email") && validation.checkPattern(email, "tbEmail", "(*) Vui lòng nhập email đúng định dạng", /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/);
+    isValue &= validation.checkEmpty(passWord, "tbMatKhau", "(*) Vui lòng nhập mật khẩu") && validation.checkDigitLength(passWord, "tbMatKhau", "(*) Vui lòng nhập mật khẩu 6-10 kí tự", 6, 10) && validation.checkPattern(passWord, "tbMatKhau", "Mật khẩu bao gồm chữ viết hoa, thường, số, kí tự đặc biệt", /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{0,}$/);
+    isValue &= validation.checkEmpty(basicSalary, "tbLuongCB", "(*) Vui lòng nhập lương") && validation.checkNumber(basicSalary, "tbLuongCB", "(*) Vui lòng nhập lương từ 1000000 => 20000000", 1000000, 20000000);
+    isValue &= validation.checkEmpty(workTime, "tbGiolam", "(*) Vui lòng nhập giờ làm") && validation.checkNumber(workTime, "tbGiolam", "(*) Vui lòng nhập giờ làm từ 80 => 200 giờ", 80, 200);
+    isValue &= validation.checkEmptyOptions("chucvu", "tbChucVu", "(*) Vui lòng chọn chức vụ");
+    isValue &= validation.checkDayWork("datepicker", "tbNgay", "(*) Vui lòng chọn ngày làm") && validation.checkFormatDay("datepicker", "tbNgay", "(*) Vui lòng chọn theo định dạng MM/dd/yyyy");
 
     if (isValue) {
         var employee = new Employee(userName, fullName, email, passWord, workday, basicSalary, position, workTime);
@@ -38,6 +42,14 @@ getEle("btnThem").onclick = function () {
     getEle("btnCapNhat").disabled = true;
     getEle("btnThemNV").disabled = false;
     getEle("tknv").disabled = false;
+    resetError("tbTKNV");
+    resetError("tbTen");
+    resetError("tbEmail");
+    resetError("tbMatKhau");
+    resetError("tbLuongCB");
+    resetError("tbGiolam");
+    resetError("tbChucVu");
+    resetError("tbNgay");
 }
 // hàm thêm nhân viên
 function addUser() {
@@ -47,7 +59,7 @@ function addUser() {
         renderTable(listEmployee.arr);
         setLocalStorage()
     }
-   
+
 }
 // hàm editUser 
 function editUser(userName) {
@@ -92,22 +104,22 @@ function renderTable(data) {
     var content = "";
     for (var i = 0; i < data.length; i++) {
         var user = data[i];
-        content += `
-            <tr>
-                <td>${user.userName} </td>
-                <td>${user.fullName} </td>
-                <td>${user.email} </td>
-                <td>${user.workday} </td>
-                <td>${user.position} </td>
-                <td>${user.totalSalary} </td>
-                <td>${user.rating} </td>
-                <td> 
-                <button onclick="editUser('${user.userName}')" class="btn btn-success" data-toggle="modal"
-                data-target="#myModal">Sửa</button>
-                <button class="btn btn-danger" onclick="delUser('${user.userName}')">Xóa</button>
-                </td>
-            </tr>
-        `
+            content += `
+                <tr>
+                    <td>${user.userName} </td>
+                    <td>${user.fullName} </td>
+                    <td>${user.email} </td>
+                    <td>${user.workday} </td>
+                    <td>${user.position} </td>
+                    <td>${user.totalSalary} </td>
+                    <td>${user.rating} </td>
+                    <td> 
+                    <button onclick="editUser('${user.userName}')" class="btn btn-success" data-toggle="modal"
+                    data-target="#myModal">Sửa</button>
+                    <button class="btn btn-danger" onclick="delUser('${user.userName}')">Xóa</button>
+                    </td>
+                </tr>
+            `
     }
     getEle("tableDanhSach").innerHTML = content;
     return content;
