@@ -4,10 +4,6 @@ getLocalStorage();
 function getEle(id) {
     return document.getElementById(id);
 }
-function resetError(id) {
-    getEle(id).style.display = "none";
-    getEle(id).innerHTML = "";
-}
 // hàm thông tin nhân viên
 function employeeInformation(isAdd) {
     var userName = getEle("tknv").value;
@@ -104,7 +100,7 @@ function renderTable(data) {
     var content = "";
     for (var i = 0; i < data.length; i++) {
         var user = data[i];
-            content += `
+        content += `
                 <tr>
                     <td>${user.userName} </td>
                     <td>${user.fullName} </td>
