@@ -58,9 +58,9 @@ function Validation() {
     };
     this.checkDayWork = function (idCheck, errorId, mess) {
         var checkInput = document.getElementById(idCheck).value;
-        var selectedDate = new Date(checkInput);
+        // var selectedDate = new Date(checkInput);
         // if (isNaN(selectedDate)) // hỏi chỗ mentor chỗ này
-        if (isNaN(selectedDate.getTime())) {
+        if (checkInput === "") {
             showError(errorId, mess);
             return false;
         }

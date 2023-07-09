@@ -38,14 +38,8 @@ getEle("btnThem").onclick = function () {
     getEle("btnCapNhat").disabled = true;
     getEle("btnThemNV").disabled = false;
     getEle("tknv").disabled = false;
-    resetError("tbTKNV");
-    resetError("tbTen");
-    resetError("tbEmail");
-    resetError("tbMatKhau");
-    resetError("tbLuongCB");
-    resetError("tbGiolam");
-    resetError("tbChucVu");
-    resetError("tbNgay");
+    resetError("tbTKNV", "tbTen", "tbEmail", "tbMatKhau", "tbLuongCB", "tbNgay", "tbChucVu", "tbGiolam")
+    clearInput("tknv", "name", "email", "password", "datepicker", "luongCB", "chucvu", "gioLam");
 }
 // hàm thêm nhân viên
 function addUser() {
@@ -78,9 +72,11 @@ function editUser(userName) {
 // hàm updateUser 
 function updateUser() {
     var employee = employeeInformation(false);
-    listEmployee.updateUser(employee);
-    renderTable(listEmployee.arr);
-    setLocalStorage();
+    if (employee) {
+        listEmployee.updateUser(employee);
+        renderTable(listEmployee.arr);
+        setLocalStorage();
+    }
 }
 // hàm xóa User 
 function delUser(userName) {
@@ -110,7 +106,7 @@ function renderTable(data) {
                     <td>${user.totalSalary} </td>
                     <td>${user.rating} </td>
                     <td> 
-                    <button onclick="editUser('${user.userName}')" class="btn btn-success" data-toggle="modal"
+                    <button onclick="editUser('${user.userName}')" class="btn btn-warning" data-toggle="modal"
                     data-target="#myModal">Sửa</button>
                     <button class="btn btn-danger" onclick="delUser('${user.userName}')">Xóa</button>
                     </td>
