@@ -25,7 +25,7 @@ function employeeInformation(isAdd) {
     isValue &= validation.checkEmpty(basicSalary, "tbLuongCB", "(*) Vui lòng nhập lương") && validation.checkNumber(basicSalary, "tbLuongCB", "(*) Vui lòng nhập lương từ 1000000 => 20000000", 1000000, 20000000);
     isValue &= validation.checkEmpty(workTime, "tbGiolam", "(*) Vui lòng nhập giờ làm") && validation.checkNumber(workTime, "tbGiolam", "(*) Vui lòng nhập giờ làm từ 80 => 200 giờ", 80, 200);
     isValue &= validation.checkEmptyOptions("chucvu", "tbChucVu", "(*) Vui lòng chọn chức vụ");
-    isValue &= validation.checkDayWork("datepicker", "tbNgay", "(*) Vui lòng chọn ngày làm") && validation.checkFormatDay("datepicker", "tbNgay", "(*) Vui lòng chọn theo định dạng MM/dd/yyyy");
+    isValue &= validation.checkDayWork("datepicker", "tbNgay", "(*) Vui lòng chọn ngày làm") && validation.checkFormatDay("datepicker", "tbNgay", "(*) Vui lòng chọn theo định dạng MM/dd/yyyy") && validation.isValidDate("datepicker", "tbNgay", "(*) Vui lòng chọn ngày hợp lệ");
 
     if (isValue) {
         var employee = new Employee(userName, fullName, email, passWord, workday, basicSalary, position, workTime);
