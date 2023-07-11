@@ -7,31 +7,24 @@ function disableError(errorId) {
     getEle(errorId).innerHTML = "";
 }
 function resetError(tbTKNV, tbTen, tbEmail, tbMatKhau, tbLuongCB, tbNgay, tbChucVu, tbGiolam) {
-    getEle(tbTKNV).style.display = "none";
-    getEle(tbTKNV).innerHTML = "";
+    disableError(tbTKNV);
     // tắt thông báo tên
-    getEle(tbTen).style.display = "none";
-    getEle(tbTen).innerHTML = "";
+    disableError(tbTen);
     // tắt thông báo email
-    getEle(tbEmail).style.display = "none";
-    getEle(tbEmail).innerHTML = "";
+    disableError(tbEmail);
     // tắt thông báo mật khẩu 
-    getEle(tbMatKhau).style.display = "none";
-    getEle(tbMatKhau).innerHTML = "";
+    disableError(tbMatKhau);
     // tắt thông báo lương
-    getEle(tbLuongCB).style.display = "none";
-    getEle(tbLuongCB).innerHTML = "";
+    disableError(tbLuongCB);
     // tắt thông báo ngày
-    getEle(tbNgay).style.display = "none";
-    getEle(tbNgay).innerHTML = "";
+    disableError(tbNgay);
     // tắt thông báo chức vụ
-    getEle(tbChucVu).style.display = "none";
-    getEle(tbChucVu).innerHTML = "";
+    disableError(tbChucVu);
     // tắt thông báo giờ làm
-    getEle(tbGiolam).style.display = "none";
-    getEle(tbGiolam).innerHTML = "";
+    disableError(tbGiolam);
+
 }
-function clearInput (userName, fullName, email, passWord, workday, basicSalary, position, workTime) {
+function clearInput(userName, fullName, email, passWord, workday, basicSalary, position, workTime) {
     getEle(userName).value = "";
     getEle(fullName).value = "";
     getEle(email).value = "";
