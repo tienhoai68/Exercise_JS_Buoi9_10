@@ -103,7 +103,7 @@ function renderTable(data) {
                     <td>${user.email} </td>
                     <td>${user.workday} </td>
                     <td>${user.position} </td>
-                    <td>${user.totalSalary} </td>
+                    <td>${user.totalSalary.toLocaleString()} VND</td>
                     <td>${user.rating} </td>
                     <td> 
                     <button onclick="editUser('${user.userName}')" class="btn btn-warning" data-toggle="modal"

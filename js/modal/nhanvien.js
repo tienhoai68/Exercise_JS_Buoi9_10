@@ -15,7 +15,7 @@ function Employee(userName, fullName, email, passWord, workday, basicSalary, pos
         } else if (this.position === "Trưởng phòng") {
             this.totalSalary = this.basicSalary * 2;
         } else if (this.position === "Nhân viên") {
-            this.totalSalary = this.basicSalary;
+            this.totalSalary = this.basicSalary *1;
         }
     };
     this.employeeRating = function () {
