@@ -15,8 +15,6 @@ function ListEmployee () {
         return indexUserName;
     }
     this.editUser = function (userName){
-        getEle("tbTKNV").style.display = "none";
-        getEle("tbTKNV").innerHTML = "";
         var indexUserName = this.searchUserName(userName);
         if (indexUserName !== -1) {
             var employee = this.arr[indexUserName];

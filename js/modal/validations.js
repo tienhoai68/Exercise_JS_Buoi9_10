@@ -23,6 +23,22 @@ function Validation() {
         disableError(errorId);
         return true;
     };
+    this.checkEmailExist = function (value, errorId, mess, listEmployee) {
+        var isExist = false;
+        for (var i = 0; i < listEmployee.length; i++) {
+            var employee = listEmployee[i];
+            if (value === employee.email) {
+                isExist = true;
+                break;
+            }
+        }
+        if (isExist) {
+            showError(errorId, mess);
+            return false;
+        }
+        disableError(errorId);
+        return true;
+    };
     this.checkEmptyOptions = function (idCheck, errorId, mess) {
         var dataCheck = document.getElementById(idCheck);
         if (dataCheck.selectedIndex !== 0) {

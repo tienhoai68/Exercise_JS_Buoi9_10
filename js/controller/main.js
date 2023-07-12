@@ -5,7 +5,7 @@ function getEle(id) {
     return document.getElementById(id);
 }
 // hàm thông tin nhân viên
-function employeeInformation(isAdd) {
+function employeeInformation(isAdd, isExistEmail) {
     var userName = getEle("tknv").value;
     var fullName = getEle("name").value;
     var email = getEle("email").value;
@@ -20,7 +20,9 @@ function employeeInformation(isAdd) {
         isValue &= validation.checkEmpty(userName, "tbTKNV", "(*) Vui lòng nhập tài khoản") && validation.checkDigitLength(userName, "tbTKNV", "(*) Vui lòng nhập từ 4 - 6 kí số", 4, 6) && validation.checkExistUserName(userName, "tbTKNV", " (*) Tài Khoản đã tồn tại", listEmployee.arr);
     }
     isValue &= validation.checkEmpty(fullName, "tbTen", "(*) Vui lòng nhập họ và tên") && validation.checkPattern(fullName, "tbTen", "(*) Họ và Tên vui lòng nhập chữ", "^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶ" + "ẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợ" + "ụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\s]+$");
-    isValue &= validation.checkEmpty(email, "tbEmail", "(*) Vui lòng nhập email") && validation.checkPattern(email, "tbEmail", "(*) Vui lòng nhập email đúng định dạng", /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/);
+    if (isExistEmail) {
+        isValue &= validation.checkEmpty(email, "tbEmail", "(*) Vui lòng nhập email") && validation.checkPattern(email, "tbEmail", "(*) Vui lòng nhập email đúng định dạng", /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) && validation.checkEmailExist(email, "tbEmail", " (*) Email đã tồn tại", listEmployee.arr);
+    }
     isValue &= validation.checkEmpty(passWord, "tbMatKhau", "(*) Vui lòng nhập mật khẩu") && validation.checkDigitLength(passWord, "tbMatKhau", "(*) Vui lòng nhập mật khẩu 6-10 kí tự", 6, 10) && validation.checkPattern(passWord, "tbMatKhau", " (*) Mật khẩu bao gồm chữ viết hoa, thường, số, kí tự đặc biệt", /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{0,}$/);
     isValue &= validation.checkEmpty(basicSalary, "tbLuongCB", "(*) Vui lòng nhập lương") && validation.checkNumber(basicSalary, "tbLuongCB", "(*) Vui lòng nhập lương từ 1000000 => 20000000", 1000000, 20000000);
     isValue &= validation.checkEmpty(workTime, "tbGiolam", "(*) Vui lòng nhập giờ làm") && validation.checkNumber(workTime, "tbGiolam", "(*) Vui lòng nhập giờ làm từ 80 => 200 giờ", 80, 200);
@@ -43,7 +45,7 @@ getEle("btnThem").onclick = function () {
 }
 // hàm thêm nhân viên
 function addUser() {
-    var user = employeeInformation(true);
+    var user = employeeInformation(true, true);
     if (user) {
         listEmployee.addEmployee(user);
         renderTable(listEmployee.arr);
@@ -69,9 +71,23 @@ function editUser(userName) {
     getEle("tknv").disabled = true;
     resetError("tbTKNV", "tbTen", "tbEmail", "tbMatKhau", "tbLuongCB", "tbNgay", "tbChucVu", "tbGiolam");
 }
+//Hàm trả về email của tài khoản đang chỉnh sửa
+function findCurrentEmail() {
+    var account = getEle('tknv').value;
+    var currentEmployee = listEmployee.editUser(account);
+    return currentEmployee.email;
+}
 // hàm updateUser 
 function updateUser() {
-    var employee = employeeInformation(false);
+    var currentEmail = findCurrentEmail();
+    var inputEmail = getEle('email').value;
+    var employee;
+    if (inputEmail === currentEmail) {
+        disableError('tbEmail');
+        employee = employeeInformation(false, false);
+    } else {
+        employee = employeeInformation(false, true);
+    }
     if (employee) {
         listEmployee.updateUser(employee);
         renderTable(listEmployee.arr);
